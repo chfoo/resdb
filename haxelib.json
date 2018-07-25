@@ -1,0 +1,14 @@
+{
+  "name": "resdb",
+  "url" : "https://github.com/chfoo/resdb/",
+  "license": "MIT",
+  "tags": ["cross"],
+  "description": "Read-only, key-value database using a resource embedding system",
+  "version": "0.1.0",
+  "classPath": "src/",
+  "releasenote": "Initial release",
+  "contributors": ["chfoo"],
+  "dependencies": {
+    "msgpack-haxe": "1.15.1"
+  }
+}

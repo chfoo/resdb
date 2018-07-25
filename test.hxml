@@ -1,0 +1,7 @@
+-cp src/
+-cp test/
+-lib msgpack-haxe
+-lib utest
+-debug
+-main resdb.TestAll
+--macro resdb.TestEmbedResource.embed()

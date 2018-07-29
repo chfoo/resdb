@@ -3,9 +3,11 @@ package resdb.pageformat;
 import haxe.io.BytesOutput;
 import haxe.io.BytesInput;
 import haxe.io.Bytes;
-import haxe.Int64;
 
 
+/**
+    An entry in the database.
+**/
 class Record implements Serializable {
     public var key:Bytes;
     public var value:Bytes;

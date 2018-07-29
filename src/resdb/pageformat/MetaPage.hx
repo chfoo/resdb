@@ -7,6 +7,9 @@ import haxe.io.BytesOutput;
 import org.msgpack.MsgPack;
 
 
+/**
+    Page describing the database.
+**/
 class MetaPage extends Page implements Serializable {
     public var keyCount:Int;
     public var firstPageID:Int;
@@ -38,6 +41,9 @@ class MetaPage extends Page implements Serializable {
 }
 
 
+/**
+    Key range information of an database index.
+**/
 typedef IndexRange = {
     startKey:Bytes,
     endKey:Bytes

@@ -5,6 +5,9 @@ import haxe.io.BytesOutput;
 import haxe.io.BytesInput;
 
 
+/**
+    Page containing records.
+**/
 class RecordPage extends Page {
     public var records(default, null):Array<Record>;
 

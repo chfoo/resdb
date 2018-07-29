@@ -3,6 +3,9 @@ package resdb.adapter;
 import haxe.io.Bytes;
 
 
+/**
+    Serializes/deserializes integers in big-endian byte order.
+**/
 class IntConverter implements TypeConverter<Int> {
     public function new() {
     }

@@ -159,3 +159,5 @@ Database format
 The database stores records into pages. When the page packer processes the records, it sorts them by key, and fills pages with the serialized data. Records are not equally distributed and pages are filled up sequentially without splitting a record. As such, the maximum page size dictates how large a record may be.
 
 Once all the records are packed and serialized into pages, the ranges of the records for each page are collected and serialized as the first page. The ranges serve as an index for looking up the appropriate page with the given key.
+
+The maximum number of records & pages and the maximum length of keys & values is 2147483647 which is the limit of the integer type.

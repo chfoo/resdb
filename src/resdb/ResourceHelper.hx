@@ -1,5 +1,7 @@
 package resdb;
 
+import haxe.io.Bytes;
+
 
 /**
     Helper class that uses `haxe.Resource` as its resource mechanism.
@@ -10,7 +12,7 @@ package resdb;
     such as `example-0` or `example-123`.
 **/
 class ResourceHelper {
-    #if macro
+    #if (macro || doc_gen)
     /**
         Adds the records to the resource.
 
@@ -18,7 +20,7 @@ class ResourceHelper {
 
         @param pagePacker A page packer containing the records.
     **/
-    public static function addResource(pagePacker:PagePacker) {
+    public static function addResource(pagePacker:PagePacker):Array<Bytes> {
         #if macro
         var dataPages = pagePacker.packPages();
         var name = pagePacker.config.name;
@@ -26,8 +28,10 @@ class ResourceHelper {
         for (index in 0...dataPages.length) {
             var pageBytes = dataPages[index];
             haxe.macro.Context.addResource('$name-$index', pageBytes);
+
         }
-        #elseif doc_gen
+        return dataPages;
+        #else
             throw "Not available outside macro";
         #end
     }

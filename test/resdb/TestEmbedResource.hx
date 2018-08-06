@@ -30,7 +30,8 @@ class TestEmbedResource {
             );
         }
 
-        ResourceHelper.addResource(packer);
+        var pagesBytes = ResourceHelper.addResource(packer);
+        trace('Added ${pagesBytes.length} pages');
     }
 
     static function embed2() {
@@ -43,7 +44,8 @@ class TestEmbedResource {
             );
         }
 
-        ResourceHelper.addResource(packer);
+        var pagesBytes = ResourceHelper.addResource(packer);
+        trace('Added ${pagesBytes.length} pages');
     }
     #end
 }

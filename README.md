@@ -153,6 +153,11 @@ var findResult = cursor.find(456);
 trace(findResult);
 ```
 
+### Further details
+
+* [API documentation](https://chfoo.github.io/resdb/api/)
+
+
 Database format
 ---------------
 

@@ -1,7 +1,7 @@
 package resdb.test;
 
 import utest.Assert;
-import resdb.store.ResourceHelper;
+import resdb.store.ResourcePageStore;
 
 
 using resdb.adapter.IntAdapter;
@@ -12,7 +12,7 @@ class TestIntAdapter {
     }
 
     public function testAdapterGet() {
-        var database = ResourceHelper.getDatabase({name: "resource2"});
+        var database = ResourcePageStore.getDatabase({name: "resource2"});
 
         switch database.intGet(100) {
             case Some(value):
@@ -23,7 +23,7 @@ class TestIntAdapter {
     }
 
     public function testAdapterCursor() {
-        var database = ResourceHelper.getDatabase({name: "resource2"});
+        var database = ResourcePageStore.getDatabase({name: "resource2"});
         var cursor = database.intCursor();
 
         var previousKey = -1;

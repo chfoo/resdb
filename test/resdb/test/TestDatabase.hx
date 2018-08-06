@@ -2,7 +2,7 @@ package resdb.test;
 
 import haxe.io.Bytes;
 import utest.Assert;
-import resdb.store.ResourceHelper;
+import resdb.store.ResourcePageStore;
 
 
 class TestDatabase {
@@ -10,7 +10,7 @@ class TestDatabase {
     }
 
     public function testGet() {
-        var database = ResourceHelper.getDatabase({name: "resource1"});
+        var database = ResourcePageStore.getDatabase({name: "resource1"});
 
         switch database.get(Bytes.ofString("key0")) {
             case Some(value):
@@ -21,7 +21,7 @@ class TestDatabase {
     }
 
     public function testGetNone() {
-        var database = ResourceHelper.getDatabase({name: "resource1"});
+        var database = ResourcePageStore.getDatabase({name: "resource1"});
 
         switch database.get(Bytes.ofString("no-exist")) {
             case Some(value):
@@ -32,7 +32,7 @@ class TestDatabase {
     }
 
     public function testCount() {
-        var database = ResourceHelper.getDatabase({name: "resource1"});
+        var database = ResourcePageStore.getDatabase({name: "resource1"});
         Assert.equals(100, database.count());
     }
 }

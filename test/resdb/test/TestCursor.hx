@@ -2,7 +2,7 @@ package resdb.test;
 
 import haxe.io.Bytes;
 import utest.Assert;
-import resdb.store.ResourceHelper;
+import resdb.store.ResourcePageStore;
 
 
 class TestCursor {
@@ -10,7 +10,7 @@ class TestCursor {
     }
 
     public function testFirstLast() {
-        var database = ResourceHelper.getDatabase({name: "resource1"});
+        var database = ResourcePageStore.getDatabase({name: "resource1"});
         var cursor = database.cursor();
 
         Assert.equals("key0", cursor.first().toString());
@@ -19,7 +19,7 @@ class TestCursor {
     }
 
     public function testTraverse() {
-        var database = ResourceHelper.getDatabase({name: "resource1"});
+        var database = ResourcePageStore.getDatabase({name: "resource1"});
         var cursor = database.cursor();
         var count = 0;
 
@@ -49,7 +49,7 @@ class TestCursor {
     }
 
     public function testFind() {
-        var database = ResourceHelper.getDatabase({name: "resource1"});
+        var database = ResourcePageStore.getDatabase({name: "resource1"});
         var cursor = database.cursor();
 
         // * key100

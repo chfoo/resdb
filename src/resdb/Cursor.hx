@@ -87,6 +87,8 @@ class Cursor {
     }
 
     function findRecordIndex(key:Bytes):Int {
+        #if resdb_cursor_linear_scan
+        // Linear scan
         var candidateIndex = 0;
 
         for (index in 0...currentPage.records.length) {
@@ -100,6 +102,32 @@ class Cursor {
         }
 
         return candidateIndex;
+        #else
+        // Binary search
+        var lowerIndex = 0;
+        var upperIndex = currentPage.records.length - 1;
+
+        while (lowerIndex < upperIndex) {
+            var middleIndex = Std.int((lowerIndex + upperIndex) / 2);
+            var record = currentPage.records[middleIndex];
+            var compareResult = key.compare(record.key);
+
+            if (compareResult >= 0) {
+                lowerIndex = middleIndex + 1;
+            } else {
+                upperIndex = middleIndex - 1;
+            }
+        }
+
+        var record = currentPage.records[lowerIndex];
+        var compareResult = key.compare(record.key);
+
+        if (compareResult >= 0) {
+            return lowerIndex;
+        } else {
+            return lowerIndex - 1;
+        }
+        #end
     }
 
     /**

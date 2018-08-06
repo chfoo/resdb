@@ -51,12 +51,41 @@ class TestCursor {
         var database = ResourceHelper.getDatabase({name: "resource1"});
         var cursor = database.cursor();
 
+        // * key100
+        // * key1000
+        // > key101
+        // * key1050
+        // > key1051
+        // * key1100
+
+        switch cursor.find(Bytes.ofString("key100")) {
+            case Some(key): Assert.equals("key100", key.toString());
+            case None: Assert.fail();
+        }
+
+        switch cursor.find(Bytes.ofString("key1000")) {
+            case Some(key): Assert.equals("key1000", key.toString());
+            case None: Assert.fail();
+        }
+
         switch cursor.find(Bytes.ofString("key101")) {
-            case Some(key):
-                // key100, key1000, key101, key1050
-                Assert.equals("key1000", key.toString());
-            case None:
-                Assert.fail();
+            case Some(key): Assert.equals("key1000", key.toString());
+            case None: Assert.fail();
+        }
+
+        switch cursor.find(Bytes.ofString("key1050")) {
+            case Some(key): Assert.equals("key1050", key.toString());
+            case None: Assert.fail();
+        }
+
+        switch cursor.find(Bytes.ofString("key1051")) {
+            case Some(key): Assert.equals("key1050", key.toString());
+            case None: Assert.fail();
+        }
+
+        switch cursor.find(Bytes.ofString("key1100")) {
+            case Some(key): Assert.equals("key1100", key.toString());
+            case None: Assert.fail();
         }
     }
 }

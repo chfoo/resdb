@@ -9,6 +9,7 @@
   "releasenote": "Initial release",
   "contributors": ["chfoo"],
   "dependencies": {
+    "commonbox": "0.4.0",
     "msgpack-haxe": "1.15.1"
   }
 }

@@ -3,7 +3,9 @@ package resdb;
 import haxe.ds.Option;
 import haxe.io.Bytes;
 import haxe.io.BytesInput;
+import resdb.pageformat.RecordPage;
 import resdb.pageformat.MetaPage;
+import resdb.ds.Cache;
 
 
 /**
@@ -16,11 +18,15 @@ class Database {
     @:allow(resdb.Cursor)
     var metaPage:MetaPage;
 
+    @:allow(resdb.Cursor)
+    var recordPageCache:Cache<Int,RecordPage>;
+
     /**
         @param store PageStore instance that contains the actual pages.
     **/
-    public function new(store:PageStore) {
+    public function new(store:PageStore, pageCache:Int = 8) {
         this.store = store;
+        recordPageCache = new Cache(pageCache);
 
         metaPage = new MetaPage();
         metaPage.load(new BytesInput(store.getPage(0)));

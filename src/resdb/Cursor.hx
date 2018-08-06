@@ -24,9 +24,15 @@ class Cursor {
     }
 
     function loadPage(pageID:Int) {
-        var pageBytes = database.store.getPage(pageID);
-        currentPage = new RecordPage();
-        currentPage.load(new BytesInput(pageBytes));
+        switch database.recordPageCache.get(pageID) {
+            case Some(page):
+                currentPage = page;
+            case None:
+                var pageBytes = database.store.getPage(pageID);
+                currentPage = new RecordPage();
+                currentPage.load(new BytesInput(pageBytes));
+                database.recordPageCache.put(pageID, currentPage);
+        }
 
         currentPageID = pageID;
         currentArrayIndex = 0;

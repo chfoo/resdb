@@ -76,7 +76,7 @@ Then, specify `-D embed_resources` argument when building to a target.
 When you need to access your database in your program, you need to obtain the appropriate page store. When using Haxe's system, a helper function is provided:
 
 ```haxe
-var database = ResourceHelper.getDatabase({name: "myDatabase"});
+var database = ResourcePageStore.getDatabase({name: "myDatabase"});
 ```
 
 You can then retrieve a record's value using a key:
@@ -144,7 +144,7 @@ The library includes `IntAdapter` that allows the use of integer `Int` as keys:
 ```haxe
 using resdb.adapter.IntAdapter;
 
-var database = ResourceHelper.getDatabase("myDatabase");
+var database = ResourcePageStore.getDatabase("myDatabase");
 var result = database.intGet(123);
 trace(result);
 
@@ -156,6 +156,26 @@ trace(findResult);
 ### Further details
 
 * [API documentation](https://chfoo.github.io/resdb/api/)
+
+
+OpenFL Assets
+-------------
+
+The OpenFL asset system support demonstrates how to use Resdb with another resource system.
+
+Prepare the database pages by packing and saving them to your assets directory:
+
+```haxe
+var pagePacker = new PagePacker({ name: "myDatabase" });
+// [do packing]
+FilePageStore.saveDataPages("assets/", "myDatabase", pagePacker.packPages());
+```
+
+Then in your application, use:
+
+```haxe
+var database = OpenFLAssetPageStore.getDatabase({ name: "assets/myDatabase" });
+```
 
 
 Database format

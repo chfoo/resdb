@@ -14,6 +14,15 @@ class ResourcePageStore implements PageStore {
         this.config = config;
     }
 
+    /**
+        Returns a database with the given configuration for
+        a resource page store.
+    **/
+    public static function getDatabase(config:DatabaseConfig):Database {
+        var pageStore = new ResourcePageStore(config);
+        return new Database(config, pageStore);
+    }
+
     @:access(haxe.Resource.content)
     public function getPage(pageID:Int):Bytes {
         var name = '${config.name}-$pageID';

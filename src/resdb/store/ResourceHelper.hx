@@ -51,12 +51,4 @@ class ResourceHelper {
         #end
     }
     #end
-
-    /**
-        Returns the database interface using the given configuration.
-    **/
-    public static function getDatabase(config:DatabaseConfig):Database {
-        var pageStore = new ResourcePageStore(config);
-        return new Database(config, pageStore);
-    }
 }

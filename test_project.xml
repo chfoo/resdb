@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <meta title="Resdb test" package="resdb.test" version="0.0.0" company="" />
+    <app main="resdb.TestOpenFL" path="out/openfl/" file="TestOpenFL" />
+
+    <source path="src/" />
+    <source path="test/" />
+
+    <haxelib name="lime" />
+    <haxelib name="openfl" />
+    <haxelib name="msgpack-haxe" />
+    <haxelib name="commonbox" />
+
+    <assets path="test/assets" rename="assets" />
+</project>

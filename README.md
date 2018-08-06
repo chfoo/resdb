@@ -161,3 +161,13 @@ The database stores records into pages. When the page packer processes the recor
 Once all the records are packed and serialized into pages, the ranges of the records for each page are collected and serialized as the first page. The ranges serve as an index for looking up the appropriate page with the given key.
 
 The maximum number of records & pages and the maximum length of keys & values is 2147483647 which is the limit of the integer type.
+
+
+Compiler flags
+--------------
+
+To gain some performance, some compiler flags (`-D`) are provided to enable target specific optimizations.
+
+| Flag | Target | Description |
+|------|--------|-------------|
+| `resdb-js-optimize-page-store` | JS (HTML) | In `ResourcePageStore`, uses native `atob()` for base64 decoding as a replacement for `haxe.Resource.getBytes()`. |

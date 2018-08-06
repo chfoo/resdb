@@ -4,5 +4,6 @@
 -lib msgpack-haxe
 -lib utest
 -debug
+-D resdb-js-optimize-page-store
 -main resdb.TestAll
 --macro resdb.TestEmbedResource.embed()

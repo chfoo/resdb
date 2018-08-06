@@ -4,7 +4,8 @@ Change log
 Unreleased
 ----------
 
-* Changed `ResouceHelper.addResource` to return array of bytes pages.
+* Changed `ResourceHelper.addResource` to return array of bytes pages.
+* Added `ResourceHelper.addResourcePages`.
 * Added caching with `pageCache` parameter to `Database`.
 * Added `resdb-js-optimize-page-store` compiler flag.
 

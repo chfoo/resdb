@@ -14,7 +14,7 @@ import haxe.io.Bytes;
 class ResourceHelper {
     #if (macro || doc_gen)
     /**
-        Adds the records to the resource.
+        Adds the records to the resource from a page packer.
 
         This is intended to be called inside an initialization macro.
 
@@ -25,12 +25,27 @@ class ResourceHelper {
         var dataPages = pagePacker.packPages();
         var name = pagePacker.config.name;
 
+        addResourcePages(name, dataPages);
+        return dataPages;
+        #else
+            throw "Not available outside macro";
+        #end
+    }
+
+    /**
+        Adds the pages to the resource.
+
+        This is intended to be called inside an initialization macro.
+
+        @param name Name prefix.
+        @param dataBytes Raw pages produced by a page packer.
+    **/
+    public static function addResourcePages(name:String, dataPages:Array<Bytes>) {
+        #if macro
         for (index in 0...dataPages.length) {
             var pageBytes = dataPages[index];
             haxe.macro.Context.addResource('$name-$index', pageBytes);
-
         }
-        return dataPages;
         #else
             throw "Not available outside macro";
         #end

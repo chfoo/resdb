@@ -1,6 +1,7 @@
 package resdb;
 
 import haxe.io.Bytes;
+import resdb.store.ResourceHelper;
 
 using resdb.adapter.IntAdapter;
 

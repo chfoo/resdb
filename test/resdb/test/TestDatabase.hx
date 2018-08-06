@@ -2,6 +2,7 @@ package resdb.test;
 
 import haxe.io.Bytes;
 import utest.Assert;
+import resdb.store.ResourceHelper;
 
 
 class TestDatabase {

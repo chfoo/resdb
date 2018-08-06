@@ -1,4 +1,4 @@
-package resdb;
+package resdb.store;
 
 import haxe.io.Bytes;
 
@@ -53,7 +53,7 @@ class ResourceHelper {
     #end
 
     /**
-        Returns the database using the given resource name.
+        Returns the database interface using the given configuration.
     **/
     public static function getDatabase(config:DatabaseConfig):Database {
         var pageStore = new ResourcePageStore(config);

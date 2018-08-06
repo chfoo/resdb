@@ -1,6 +1,8 @@
 package resdb.test;
 
 import utest.Assert;
+import resdb.store.ResourceHelper;
+
 
 using resdb.adapter.IntAdapter;
 

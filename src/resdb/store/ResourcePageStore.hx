@@ -1,4 +1,4 @@
-package resdb;
+package resdb.store;
 
 import haxe.io.Bytes;
 import haxe.Resource;

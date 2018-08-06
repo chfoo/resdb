@@ -22,11 +22,12 @@ class Database {
     var recordPageCache:Cache<Int,RecordPage>;
 
     /**
+        @param config Database configuration.
         @param store PageStore instance that contains the actual pages.
     **/
-    public function new(store:PageStore, pageCache:Int = 8) {
+    public function new(config:DatabaseConfig, store:PageStore) {
         this.store = store;
-        recordPageCache = new Cache(pageCache);
+        recordPageCache = new Cache(config.pageCache);
 
         metaPage = new MetaPage();
         metaPage.load(new BytesInput(store.getPage(0)));

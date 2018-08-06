@@ -55,9 +55,8 @@ class ResourceHelper {
     /**
         Returns the database using the given resource name.
     **/
-    public static function getDatabase(config:DatabaseConfig,
-            pageCache:Int = 8):Database {
+    public static function getDatabase(config:DatabaseConfig):Database {
         var pageStore = new ResourcePageStore(config);
-        return new Database(pageStore, pageCache);
+        return new Database(config, pageStore);
     }
 }

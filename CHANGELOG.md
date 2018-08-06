@@ -5,8 +5,9 @@ Unreleased
 ----------
 
 * Changed `ResourceHelper.addResource` to return array of bytes pages.
+* Changed `Database` constructor to accept `DatabaseConfig` parameter.
 * Added `ResourceHelper.addResourcePages`.
-* Added caching with `pageCache` parameter to `Database`.
+* Added caching with `pageCache` parameter to `DatabaseConfig`.
 * Added `resdb-js-optimize-page-store` compiler flag.
 
 

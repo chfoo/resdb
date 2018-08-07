@@ -1,7 +1,9 @@
 package resdb.store;
 
 import haxe.io.Bytes;
+#if !doc_gen
 import openfl.utils.Assets;
+#end
 
 
 /**
@@ -24,8 +26,12 @@ class OpenFLAssetPageStore implements PageStore {
     }
 
     public function getPage(page:Int):Bytes {
+        #if !doc_gen
         var pageName = '${config.name}-$page';
 
         return Assets.getBytes(pageName);
+        #else
+        throw "in doc gen";
+        #end
     }
 }

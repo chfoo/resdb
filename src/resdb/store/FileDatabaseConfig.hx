@@ -1,6 +1,9 @@
 package resdb.store;
 
 
+/**
+    `FilePageStore`-specific config.
+**/
 @:structInit
 class FileDatabaseConfig extends DatabaseConfig {
     public var rootDirectory(default, null):String;

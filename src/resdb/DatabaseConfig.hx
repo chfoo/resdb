@@ -13,6 +13,7 @@ class DatabaseConfig {
     /**
         @param name Unique name for the collection of records.
         @param pageSize Maximum size of each page.
+        @param pageCache Maximum number of pages to be cached,
     **/
     public function new(name:String, ?pageSize:Int = 8192, ?pageCache:Int = 8) {
         this.name = name;

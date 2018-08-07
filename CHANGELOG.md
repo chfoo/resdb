@@ -1,8 +1,8 @@
 Change log
 ==========
 
-Unreleased
-----------
+0.2.0 (2018-08-07)
+------------------
 
 * Changed `ResourceHelper.addResource` to return array of bytes pages.
 * Changed `Database` constructor to accept `DatabaseConfig` parameter.

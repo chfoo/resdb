@@ -4,9 +4,9 @@
   "license": "MIT",
   "tags": ["cross"],
   "description": "Read-only, key-value database using a resource embedding system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "classPath": "src/",
-  "releasenote": "Initial release",
+  "releasenote": "Various changes, added file and OpenFL asset page stores, (See changelog)",
   "contributors": ["chfoo"],
   "dependencies": {
     "commonbox": "0.4.0",

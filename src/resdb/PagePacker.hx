@@ -44,20 +44,26 @@ class PagePacker {
         Processes and returns an array of bytes representing pages.
     **/
     public function packPages():Array<Bytes> {
-        records.sort(function (recordA, recordB) {
-            return recordA.key.compare(recordB.key);
-        });
+        if (records.length == 0) {
+            throw "At least 1 record required.";
+        }
+
+        sortRecords();
 
         var pages:Array<Page> = [];
-
-        var metaPage = new MetaPage();
-        metaPage.keyCount = records.length;
-        metaPage.firstPageID = 1;
-        metaPage.pageKeyRanges = [];
-        pages.push(metaPage);
-
+        var metaPage = addMetaPage(pages);
         var currentRecordPage = new RecordPage();
         var currentSpaceRemaining = config.pageSize;
+
+        function pushNewPage() {
+            pages.push(currentRecordPage);
+            metaPage.pageKeyRanges.push({
+                startKey: currentRecordPage.records[0].key,
+                endKey: currentRecordPage.records[currentRecordPage.records.length - 1].key,
+            });
+            currentRecordPage = new RecordPage();
+            currentSpaceRemaining = config.pageSize;
+        }
 
         for (record in records) {
             if (record.totalLength() > config.pageSize) {
@@ -65,25 +71,36 @@ class PagePacker {
             }
 
             if (record.totalLength() > currentSpaceRemaining) {
-                pages.push(currentRecordPage);
-                metaPage.pageKeyRanges.push({
-                    startKey: currentRecordPage.records[0].key,
-                    endKey: currentRecordPage.records[currentRecordPage.records.length - 1].key,
-                });
-                currentRecordPage = new RecordPage();
-                currentSpaceRemaining = config.pageSize;
+                pushNewPage();
             }
 
             currentRecordPage.records.push(record);
             currentSpaceRemaining -= record.totalLength();
         }
+        pushNewPage();
 
-        pages.push(currentRecordPage);
-        metaPage.pageKeyRanges.push({
-            startKey: currentRecordPage.records[0].key,
-            endKey: currentRecordPage.records[currentRecordPage.records.length - 1].key,
+        return serializePages(pages);
+    }
+
+    function sortRecords() {
+        records.sort(function (recordA, recordB) {
+            return recordA.key.compare(recordB.key);
         });
+    }
 
+    function addMetaPage(pages:Array<Page>) {
+        var metaPage = new MetaPage();
+
+        metaPage.keyCount = records.length;
+        metaPage.firstPageID = 1;
+        metaPage.pageKeyRanges = [];
+
+        pages.push(metaPage);
+
+        return metaPage;
+    }
+
+    function serializePages(pages:Array<Page>) {
         var serializedPages = [];
 
         for (page in pages) {
